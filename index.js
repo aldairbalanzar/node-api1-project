@@ -27,10 +27,12 @@ server.post('/api/userList', (req, res) => {
 
 //user:id endpoint
 server.get('/api/userList/:id', (req, res) => {
-    const id = req.params.id;
-    const userData = userList.find( item => item.id === id);
+    const userId = req.params.id;
+    const userData = userList.find((item) => item.id == userId);
 
-    res.status(200).json(userData);
+    userData
+    ? res.status(200).json(userData)
+    : res.status(400).json({ message: "could not find that user."})
 });
 
 server.delete('/api/userList/:id', (req, res) => {
