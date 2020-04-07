@@ -27,8 +27,8 @@ server.post('/api/userList', (req, res) => {
 
 //user:id endpoint
 server.get('/api/userList/:id', (req, res) => {
-    const userId = req.params.id;
-    const userData = userList.find((item) => item.id == userId);
+    const id = req.params.id;
+    const userData = userList.find((item) => item.id == id);
 
     userData
     ? res.status(200).json(userData)
@@ -36,10 +36,15 @@ server.get('/api/userList/:id', (req, res) => {
 });
 
 server.delete('/api/userList/:id', (req, res) => {
-    res.status(200);
+    const id = req.params.id;
+    const removedUser = userList.filter((item) => item.id === id);
+
+    removedUser
+    ?res.status(200).json('user removed')
+    :res.status(400).json({ message: "could not find user to remove."})
 });
 
-server.patch('/api/userList/:id', (req, res) => {
+server.put('/api/userList/:id', (req, res) => {
     
 })
 
